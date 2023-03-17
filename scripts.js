@@ -6,4 +6,11 @@ function createSquare() {
   return square;
 }
 
-for ()
+for (let i = 0; i <= 15; i ++) {
+  container.appendChild(createSquare());
+}
+
+const squares = document.querySelectorAll('.square');
+squares.forEach(square => square.addEventListener("mouseenter", function () {
+  square.classList.add('color');
+}));
