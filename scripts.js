@@ -11,10 +11,21 @@ function createManySquares(num) {
   };
 };
 
-function addColorClass() {
+function getRandomNum(min, max) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+function getRandomRGB() {
+  const r = getRandomNum(0, 255);
+  const g = getRandomNum(0, 255);
+  const b = getRandomNum(0, 255);
+  return `rgb(${r},${g},${b})`;
+}
+
+function changeRandomColor() {
   const squares = document.querySelectorAll('.square');
   squares.forEach(square => square.addEventListener("mouseenter", function () {
-    square.classList.add('color');
+    square.style['background-color'] = getRandomRGB();
   }));
 };
 
@@ -45,5 +56,5 @@ button.addEventListener('click', function() {
   setGridColumnsRows(numOfSides);
   removeEveryChild();
   createManySquares(numOfSides);
-  addColorClass();
+  changeRandomColor();
 });
