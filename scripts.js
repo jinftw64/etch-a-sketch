@@ -22,25 +22,29 @@ function getRandomRGB() {
   return `rgb(${r},${g},${b})`;
 }
 
-function getRandomRGB() {
-  const r = getRandomNum(0, 255);
-  const g = getRandomNum(0, 255);
-  const b = getRandomNum(0, 255);
+function getRandomRGBandDarken(valuesArray) {
+  const shadeFactor = 0.1;
+  const r = valuesArray[0] * (1 - shadeFactor);
+  const g = valuesArray[1] * (1 - shadeFactor);
+  const b = valuesArray[2] * (1 - shadeFactor);
   return `rgb(${r},${g},${b})`;
 }
 
 function getRGBValues(div) { 
   const style = window.getComputedStyle(div);
-  console.log(style.getPropertyValue('background-color'));
-  var rgbList = style.getPropertyValue('background-color').match(/\d+/g);
-  console.log(rgbList);
+  let rgbList = style.getPropertyValue('background-color').match(/\d+/g);
+  return rgbList;
 }
 
 function changeRandomColor() {
   const squares = document.querySelectorAll('.square');
   squares.forEach(square => square.addEventListener("mouseenter", function () {
-    getRGBValues(square); 
-    square.style['background-color'] = getRandomRGB();
+    if (square.style['background-color']) {
+      let currentRGB = getRGBValues(square); 
+      square.style['background-color'] = getRandomRGBandDarken(currentRGB);
+    } else {
+      square.style['background-color'] = getRandomRGB();
+    }
   }));
 };
 
