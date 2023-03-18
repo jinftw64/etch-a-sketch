@@ -22,9 +22,22 @@ function getRandomRGB() {
   return `rgb(${r},${g},${b})`;
 }
 
+function getRandomRGB() {
+  const r = getRandomNum(0, 255);
+  const g = getRandomNum(0, 255);
+  const b = getRandomNum(0, 255);
+  return `rgb(${r},${g},${b})`;
+}
+
+function getRGBValues(div) { //added
+  const style = window.getComputedStyle(div);
+  console.log(style.getPropertyValue('background-color'));
+}
+
 function changeRandomColor() {
   const squares = document.querySelectorAll('.square');
   squares.forEach(square => square.addEventListener("mouseenter", function () {
+    getRGBValues(square); //added
     square.style['background-color'] = getRandomRGB();
   }));
 };
