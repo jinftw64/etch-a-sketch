@@ -29,15 +29,17 @@ function getRandomRGB() {
   return `rgb(${r},${g},${b})`;
 }
 
-function getRGBValues(div) { //added
+function getRGBValues(div) { 
   const style = window.getComputedStyle(div);
   console.log(style.getPropertyValue('background-color'));
+  var rgbList = style.getPropertyValue('background-color').match(/\d+/g);
+  console.log(rgbList);
 }
 
 function changeRandomColor() {
   const squares = document.querySelectorAll('.square');
   squares.forEach(square => square.addEventListener("mouseenter", function () {
-    getRGBValues(square); //added
+    getRGBValues(square); 
     square.style['background-color'] = getRandomRGB();
   }));
 };
